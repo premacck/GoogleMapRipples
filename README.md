@@ -13,93 +13,98 @@ Below samples show the ripple effect in action:
 
 ------    
 
-#Download    
-###Using Gradle: under dependencies section:   
-  
-    implementation 'com.github.premacck:GoogleMapRipples:1.0.0'
+# Download    
+
+### Using Gradle: under dependencies section:   
+
+```gradle
+implementation 'com.github.premacck:GoogleMapRipples:1.0.0'
+```
 
 ### or Using Maven:
-    <repositories>
-      <repository>
-          <id>jitpack.io</id>
-          <url>https://jitpack.io</url>
-      </repository>
-    </repositories>
-    
-    <dependency>
-        <groupId>com.github.premacck</groupId>
-        <artifactId>GoogleMapRipples</artifactId>
-        <version>1.0.0</version>
-    </dependency>
+```XML
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
 
+<dependency>
+  <groupId>com.github.premacck</groupId>
+  <artifactId>GoogleMapRipples</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
 ------
 
-#Documentation
+# Documentation
 
-###Default Ripple animation
+### Default Ripple animation
 Just two lines of code :  
-Use **.startRippleMapAnimation()** and **.stopRippleMapAnimation()** methods to start and stop Animation.     
+Use `startRippleMapAnimation()` and `stopRippleMapAnimation()` methods to start and stop Animation respectively.     
 Example is given below (Preview shown above in first sample)
-  
-        // mMap is GoogleMap object, latLng is the location on map from which ripple should start
-              
-                MapRipple mapRipple = MapRipple(mMap, latLng, context);
-                mapRipple.startRippleMapAnimation()                     //in onMapReadyCallBack
-        
-                override fun onStop() {
-                    super.onStop()
-                    if (mapRipple.isAnimationRunning()) {
-                        mapRipple.stopRippleMapAnimation()
-                    }
-                }
-                
-                
-                // Start Animation again only if it is not running
-                if (!mapRipple.isAnimationRunning()) {
-                    mapRipple.startRippleMapAnimation()
-                }
-     
 
-###Advanced Ripple animation
+```kotlin
+// mMap is GoogleMap object, latLng is the location on map from which ripple should start
+
+MapRipple mapRipple = MapRipple(mMap, latLng, context);
+mapRipple.startRippleMapAnimation()                     //in onMapReadyCallBack
+
+override fun onStop() {
+  super.onStop()
+  if (mapRipple.isAnimationRunning()) {
+    mapRipple.stopRippleMapAnimation()
+  }
+}
+
+// Start Animation again only if it is not running
+if (!mapRipple.isAnimationRunning()) {
+  mapRipple.startRippleMapAnimation()
+}
+```
+
+### Advanced Ripple animation
 
 Example is given below (Preview shown above in second sample)
-  
-        // mMap is GoogleMap object, latLng is the location on map from which ripple should start
-              
-                mapRipple = new MapRipple(mMap, latLng, context)
-                mapRipple.withNumberOfRipples(3)
-                mapRipple.withFillColor(Color.BLUE)
-                mapRipple.withStrokeColor(Color.BLACK)
-                mapRipple.withStrokewidth(10)           // 10dp
-                mapRipple.withDistance(2000)            // 2000 metres radius
-                mapRipple.withRippleDuration(12000)     //12000ms
-                mapRipple.withTransparency(0.5f)
-                mapRipple.startRippleMapAnimation()
-        // Use same procedure to stop Animation and start it again as mentioned anove in Default Ripple Animation Sample
-        
-        // New functions:
-                
-                // the repeat mode of ripple animation, can be ValueAnimator.RESTART or ValueAnimator.REVERSE.
-                // default value is ValueAnimator.REVERSE
-                mapRipple.withRepeatMode(ValueAnimator.RESTART)
-                
-                // If true, ripple will fade out as it expands. Default value is true
-                withFadingOutRipple(true)
 
-###Update center of ripple as location changes(Needed when user moves)
+```kotlin
+// mMap is GoogleMap object, latLng is the location on map from which ripple should start
+
+mapRipple = new MapRipple(mMap, latLng, context)
+mapRipple.withNumberOfRipples(3)
+mapRipple.withFillColor(Color.BLUE)
+mapRipple.withStrokeColor(Color.BLACK)
+mapRipple.withStrokewidth(10)           // 10dp
+mapRipple.withDistance(2000)            // 2000 metres radius
+mapRipple.withRippleDuration(12000)     //12000ms
+mapRipple.withTransparency(0.5f)
+mapRipple.startRippleMapAnimation()
+// Use same procedure to stop Animation and start it again as mentioned anove in Default Ripple Animation Sample
+
+// New functions:
+
+// the repeat mode of ripple animation, can be ValueAnimator.RESTART or ValueAnimator.REVERSE.
+// default value is ValueAnimator.REVERSE
+mapRipple.withRepeatMode(ValueAnimator.RESTART)
+
+// If true, ripple will fade out as it expands. Default value is true
+withFadingOutRipple(true)
+```
+
+### Update center of ripple as location changes(Needed when user moves)
 Just one line of code is needed:  
-Use **.mapRipple.withLatLng(LatLng changedLatlng)** method anytime in future to update center of ripple.     
-  
-  	// after implementing **LocationListener** interface to current class use:
-        	@Override
-        	public void onLocationChanged(Location location) {
-           		mapRipple.withLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
-        	}
-	//See the sample for more help.
-       
+Use `mapRipple.withLatLng(LatLng changedLatlng)` method anytime in future to update center of ripple.     
+
+```kotlin
+// after implementing **LocationListener** interface to current class use:
+override fun onLocationChanged(Location location) {
+  mapRipple.withLatLng(new LatLng(location.latitude, location.longitude))
+}
+```
 ------
 
-###Compatibility
+### Compatibility
 
 **Minimum Android SDK**: This library requires a minimum API level of **16**.    
 
