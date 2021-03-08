@@ -1,7 +1,9 @@
 # GoogleMapRipples
 Ring and filled Ripples on google maps for android.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-GoogleMapsRippleEffect-green.svg?style=true)](https://android-arsenal.com/details/1/4126)
+Inspired from [gursuasik/GoogleMapsRippleEffect](https://github.com/gursuasik/GoogleMapsRippleEffect)
+
+[![](https://jitpack.io/v/premacck/GoogleMapRipples.svg)](https://jitpack.io/#premacck/GoogleMapRipples)
 
 # GoogleMapsRippleEffect        
 
